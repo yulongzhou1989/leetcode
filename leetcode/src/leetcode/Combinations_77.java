@@ -18,15 +18,15 @@ public class Combinations_77 {
 	
 	public static void getCombine(List<List<Integer>> l, List<Integer> tempList, int n
 			, int k, int start){
-		if(tempList.size() == k){
+		//if(tempList.size() == k){
 			l.add(new ArrayList<Integer>(tempList));
-		} else{
+		//} else{
 			for (int i=start;i<n+1;i++){
 				tempList.add(i);
 				getCombine(l, tempList, n, k, i+1);
 				tempList.remove(tempList.size()-1);
 			}
-		}
+		//}
 		
 	}
 }
