@@ -7,7 +7,7 @@ public class LongestAbsoluteFilePath_google_388 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.print(lengthLongestPath("dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"));
+		System.out.print(lengthLongestPath("dir\n\tsubdir1\n\t\tfile2.ext\n\tsubdir2\n\t\tfile.ext"));
 	}
 	
 	public static int lengthLongestPath(String input) {
@@ -20,7 +20,7 @@ public class LongestAbsoluteFilePath_google_388 {
 			while (level + 1< stack.size()) stack.pop();
 			int len = stack.peek() + s.length()-level+1;
 			stack.push(len);
-			if (s.contains(".")) maxLen = maxLen<len? maxLen:len;
+			if (s.contains(".")) maxLen = maxLen<len? len-1:maxLen;
 		}
 		
 		return maxLen;
