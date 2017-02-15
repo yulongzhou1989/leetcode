@@ -1,13 +1,47 @@
 package leetcode;
 
+import java.util.Stack;
+
 public class DecodeString_394 {
 	
 	public static void main (String [] args){
-		System.out.println(decodeString("3[a]2[bc]"));
+		System.out.println(decodeString("10[leetcode]"));
 	}
 	
 	public static String decodeString(String s){
-		StringBuilder sb = new StringBuilder();
+		//StringBuilder sb = new StringBuilder();
+		Stack<Integer> countStack = new Stack<Integer>();
+		Stack<String> resStack = new Stack<String>();
+		String res = "";
+		
+		for(int i=0;i<s.length();){
+			if (s.charAt(i)>='0' && s.charAt(i)<='9'){
+				int count = 0;
+				while(s.charAt(i)>='0' && s.charAt(i)<='9'){
+					count = 10*count + s.charAt(i)-'0';
+					i++;
+				}
+				countStack.push(count);
+			}
+			else if (s.charAt(i) == '['){
+				resStack.push(res);
+				res = "";
+				i++;
+			}
+			else if (s.charAt(i) == ']'){
+				StringBuilder temp = new StringBuilder(resStack.pop());
+				int repeatTime = countStack.pop();
+				for (int j=0;j<repeatTime;j++){
+					temp.append(res);
+				}
+				res = String.valueOf(temp);
+				i++;
+			}else{
+				res += s.charAt(i++);
+			}
+		}
+		
+		return res;
 	}
 	
 	
