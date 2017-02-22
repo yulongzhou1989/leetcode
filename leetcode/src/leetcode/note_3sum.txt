@@ -1,0 +1,3 @@
+1. 3Sum smaller, sorted array, 2 pointer  n[i]+n[j]+n[k]<target
+	259: move low point and record the high-low if fit condition
+   
