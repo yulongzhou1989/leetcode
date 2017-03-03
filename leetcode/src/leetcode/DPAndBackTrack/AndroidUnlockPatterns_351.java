@@ -1,4 +1,4 @@
-package leetcode.DynamicProgrammingAndBackTrack;
+package leetcode.DPAndBackTrack;
 
 public class AndroidUnlockPatterns_351 {
 
