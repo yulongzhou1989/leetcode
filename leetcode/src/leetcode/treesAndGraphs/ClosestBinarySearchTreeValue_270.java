@@ -12,7 +12,7 @@ public class ClosestBinarySearchTreeValue_270 {
 		System.out.println(closestValue(root, 6.0));
 	}
 	
-	public static int closestValue(TreeNode root, double target) {
+	public static int closestValue1(TreeNode root, double target) {
         if (root == null) return 0;
         return helper(root, target);
     }
@@ -22,6 +22,19 @@ public class ClosestBinarySearchTreeValue_270 {
         if (nextNode == null) return root.val;
         int nextVal = helper(nextNode, target);
         return Math.abs(root.val-target)<Math.abs(nextVal-target)?root.val:nextVal;
+    }
+    
+    public static int closestValue(TreeNode root, double target) {
+    	if (root == null) return 0;
+    	int ret = root.val;
+    	
+    	while(root!=null){
+    		if (Math.abs(target-root.val)<Math.abs(target-ret)){
+    			ret = root.val;
+    		}
+    		root = root.val > target? root.left:root.right;
+    	}
+    	return ret;
     }
 
 }
