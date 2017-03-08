@@ -1,4 +1,4 @@
-package leetcode.DPAndBackTrack;
+package leetcode.greedy;
 
 public class BestTimeToBuyAndSellStock_121 {
 
