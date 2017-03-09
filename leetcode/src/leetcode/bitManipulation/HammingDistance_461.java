@@ -11,6 +11,7 @@ public class HammingDistance_461 {
         int z = x^y;
         int count = 0;
         while(z!=0){
+        	//z&(z-1) erase less significant bit
             z=z&(z-1);
             count++;
         }
