@@ -13,6 +13,7 @@ public class PlusOneLinkedList_google_369 {
 	}
 
 	public static ListNode plusOne(ListNode head) {
+		if (head==null) return null;
 		ListNode l = reverse(head);
 		l = addOne(l);
 		head = reverse(l);
