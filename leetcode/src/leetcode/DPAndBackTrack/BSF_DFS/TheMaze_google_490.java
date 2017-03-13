@@ -15,24 +15,24 @@ public class TheMaze_google_490 {
 		//int [] des = {0,0};
 		int [] start = {0,4};
 		int [] des = {1,2};
-		//System.out.println(hasPath(maze, start, des));
+		System.out.println(hasPath(maze, start, des));
 	}
 	
-	int [] Directions = {0,1,0,-1,0};
+	static int [] Directions = {0,1,0,-1,0};
 	
-	public boolean hasPath(int [][] maze, int []start, int [] distination){
+	public static boolean hasPath(int [][] maze, int []start, int [] distination){
 		boolean [][] visited = new boolean [maze.length][maze[0].length];
 		return dfs(maze, start, distination, visited, new boolean [maze.length][maze[0].length]);
 	}
 	
-	public boolean dfs(int [][] maze, int [] start, int [] distination,boolean [][] visited, boolean [][] failed){
+	public static boolean dfs(int [][] maze, int [] start, int [] distination,boolean [][] visited, boolean [][] failed){
 		if (visited[start[0]][start[1]]) return false;
 		if (Arrays.equals(start,distination)) return true;
 		if (failed[start[0]][start[1]]) return false;
 		
 		visited[start[0]][start[1]] = true;
 		
-		for (int i=0; i<Directions.length; i++){
+		for (int i=0; i<Directions.length-1; i++){
 			int [] newStart = roll(maze, start[0], start[1], Directions[i], Directions[i+1]);
 			if(dfs(maze, newStart, distination, visited, failed)) return true;
 		}
@@ -40,7 +40,7 @@ public class TheMaze_google_490 {
 		return false;
 	}
 	
-	public int [] roll(int [][] maze, int row, int col, int rowInc, int colInc){
+	public static int [] roll(int [][] maze, int row, int col, int rowInc, int colInc){
 		while(canRoll(maze, row+rowInc, col+colInc)){
 			row+=rowInc;
 			col+=colInc;
@@ -49,7 +49,7 @@ public class TheMaze_google_490 {
 		return new int [] {row,col};
 	}
 	
-	public boolean canRoll(int [][]maze, int row, int col){
+	public static boolean canRoll(int [][]maze, int row, int col){
 		if (row>=maze.length || row<0 || col>=maze[0].length || col <0 || maze[row][col]==1)
 			return false;
 		return true;
