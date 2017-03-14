@@ -25,8 +25,6 @@ public class ValidWordAbbreviation_google_408 {
                word = word.substring(1);
            }
        }
-       
-       if (word.length() == 0) return true;
-       else return false;
+       return word.length()==0;
    }
 }
