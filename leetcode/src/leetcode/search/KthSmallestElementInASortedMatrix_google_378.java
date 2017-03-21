@@ -11,7 +11,7 @@ public class KthSmallestElementInASortedMatrix_google_378 {
 		System.out.println(kthSmallest(matrix, 5));
 	}
 	
-	public int kthSmallest(int[][] matrix, int k) {
+	public static int kthSmallest(int[][] matrix, int k) {
         if (matrix.length == 0 || k==0) return 0;
         //int [] res = new int [matrix.length*matrix[0].length];
         List<Integer> list = new ArrayList<Integer>();
@@ -25,7 +25,7 @@ public class KthSmallestElementInASortedMatrix_google_378 {
         return list.get(k-1);
     }
     
-    public int binarySearch(List<Integer> list, int num){
+    public static int binarySearch(List<Integer> list, int num){
         int high = list.size()-1;
         int low = 0;
         while(low<=high){
