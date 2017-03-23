@@ -23,7 +23,10 @@ public class FindModeInBinarySearchTree_google_501 {
         map = new HashMap<Integer, Integer>();
         list = new ArrayList<Integer>();
         inOrder(root);
-        Integer [] res = list.toArray(new Integer [list.size()]);
+        int [] res = new int [list.size()];
+        for(int i=0;i<list.size();i++){
+        	res[i] = list.get(i);
+        }
         return res;
     }
     
