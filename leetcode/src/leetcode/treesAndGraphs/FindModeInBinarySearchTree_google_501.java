@@ -61,13 +61,7 @@ public class FindModeInBinarySearchTree_google_501 {
         //in order search
         inOrder(root);
         int [] res = new int [list.size()];
-<<<<<<< HEAD
-        for(int i=0;i<list.size();i++){
-        	res[i] = list.get(i);
-        }
-=======
         for(int i=0;i<list.size();i++) res[i] = list.get(i);
->>>>>>> 708b06d2eaa0621076dcacb014b6f71ce8f062a9
         return res;
     }
     
