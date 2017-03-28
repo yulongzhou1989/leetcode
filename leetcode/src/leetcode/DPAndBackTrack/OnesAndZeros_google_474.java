@@ -8,36 +8,38 @@ public class OnesAndZeros_google_474 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String [] strs = {"10","0001","111001","1","0"};
-		System.out.println(findMaxForm1(strs,3,4));
+		System.out.println(findMaxForm(strs,3,4));
 	}
 
 	
-//    public static int findMaxForm(String[] strs, int m, int n) {
-//        return helper(strs, m, n, new ArrayList<String>(), 0, 0);
-//    }
-//    
-    public static List<List<String>> findMaxForm1(String[] strs, int m, int n) {
-    	List<List<String>> tempList = new ArrayList<List<String>>();
-    	helper(strs, m, n, new ArrayList<String>(), 0, 0, tempList);
-        return tempList;
+	public static int findMaxForm(String[] strs, int m, int n) {
+        return helper(strs, m, n, new ArrayList<String>(), 0, 0);
     }
     
-    private static int helper(String []  strs, int m, int n, List<String> tempList, int max, int pos, List<List<String>> res){
-        //if m==0 and n==0 find the correct string
-        if (m==0 && n==0) {
-        	res.add(new ArrayList<String>(tempList));
-        	return tempList.size();
-        }
-        if (m<0 || n<0) return -1;
-        
+    private static int helper(String []  strs, int m, int n, List<String> tempList, int max, int pos){
         for(int i=pos;i<strs.length;i++){
-            tempList.add(strs[i]);
             int [] counts = countOnesAndZeros(strs[i]);
-            max = Math.max(helper(strs, m-counts[0], n-counts[1], tempList, max, i+1, res), max);
+            if (m-counts[0]<0 || n-counts[1]<0) continue;
+            tempList.add(strs[i]);
+            max = Math.max(helper(strs, m-counts[0], n-counts[1], tempList, tempList.size(), i+1), max);
             tempList.remove(tempList.size()-1);
         }
         
         return max;
+    }
+    
+  //dp[m][n] = max(1+dp[m-counts[0]][n-count[1]], dp[m][n]), dp solution
+    public int findMaxForm1(String[] strs, int m, int n) {
+        int [][] dp = new int [m+1][n+1];
+        for (String s:strs){
+            int [] count = countOnesAndZeros(s);
+            for(int i=m;i>=count[0];i--){
+                for(int j=n;j>=count[1];j--){
+                    dp[i][j] = Math.max(1+dp[i-count[0]][j-count[1]],dp[i][j]);
+                }
+            }
+        }
+        return dp[m][n];
     }
     
     //count number of 0s and 1s
