@@ -14,6 +14,7 @@ public class BinaryTreeLevelOrderTraversalII_107 {
 
 	}
 
+	//BFS way
 	public List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
         if(root==null) return res;
@@ -33,5 +34,21 @@ public class BinaryTreeLevelOrderTraversalII_107 {
         }
         
         return res;
+    }
+	
+	//DFS way
+	public List<List<Integer>> levelOrderBottom1(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        levelMaker(res, root, 0);
+        return res;
+    }
+    
+    private void levelMaker(List<List<Integer>> res, TreeNode root, int level){
+        if(root == null) return;
+        if(level>=res.size())
+            res.add(0, new LinkedList<Integer>());
+        levelMaker(res, root.left, level+1);
+        levelMaker(res, root.right,level+1);
+        res.get(res.size()-level-1).add(root.val);
     }
 }
