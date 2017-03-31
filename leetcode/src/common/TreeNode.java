@@ -26,6 +26,7 @@ public class TreeNode {
 			for(int i=0;i<q.size() && pos<arr.length;i++){
 				TreeNode r = q.poll();
 				r.left = createTreeNode(arr[pos++]);
+				if (pos==arr.length) break;
 				r.right = createTreeNode(arr[pos++]);
 				if(r.left!=null)
 					q.offer(r.left); 
