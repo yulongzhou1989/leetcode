@@ -1,4 +1,4 @@
-package leetcode.greedy;
+	package leetcode.greedy;
 
 import java.util.Arrays;
 import java.util.Comparator;
