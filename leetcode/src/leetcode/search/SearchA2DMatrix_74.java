@@ -1,4 +1,4 @@
-package leetcode.StringArray;
+package leetcode.search;
 
 public class SearchA2DMatrix_74 {
 
