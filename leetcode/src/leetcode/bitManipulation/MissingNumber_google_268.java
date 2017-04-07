@@ -18,5 +18,4 @@ public class MissingNumber_google_268 {
         //perfect situation it should be zero
         return res^i;
     }
-
 }
