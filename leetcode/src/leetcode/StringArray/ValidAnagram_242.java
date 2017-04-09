@@ -7,7 +7,7 @@ public class ValidAnagram_242 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(isAnagram("zhangqirui","qiruizhang"));
+		//System.out.println(isAnagram("zhangqirui","qiruizhang"));
 	}
 	
 //	public static boolean isAnagram(String s, String t) {
