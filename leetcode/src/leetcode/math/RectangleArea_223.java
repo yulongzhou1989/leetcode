@@ -1,8 +1,5 @@
 package leetcode.math;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 public class RectangleArea_223 {
 
 	public static void main(String[] args) {
