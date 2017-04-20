@@ -1,3 +1,14 @@
 176:
     select MAX(Salary) AS SecondHighestSalary from Employee  
     	where Salary < (select MAX(Salary) from Employee)
+    	
+177: 
+	CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+	BEGIN
+	DECLARE M INT;
+	SET M = N-1;
+	  RETURN (
+	      # Write your MySQL query statement below.
+	      SELECT DISTINCT Salary FROM Employee ORDER BY Salary DESC LIMIT M, 1
+	  );
+	END
