@@ -1,0 +1,3 @@
+176:
+    select MAX(Salary) AS SecondHighestSalary from Employee  
+    	where Salary < (select MAX(Salary) from Employee)
