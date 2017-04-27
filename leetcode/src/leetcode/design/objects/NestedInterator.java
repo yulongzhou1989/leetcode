@@ -22,7 +22,7 @@ import java.util.Queue;
  *     public List<NestedInteger> getList();
  * }
  */
-public class NestedIterator implements Iterator<Integer> {
+/*public class NestedIterator implements Iterator<Integer> {
     
     Queue<Integer> q;
 
@@ -51,7 +51,7 @@ public class NestedIterator implements Iterator<Integer> {
     public boolean hasNext() {
         return q.size()>0;
     }
-}
+}*/
 
 /**
  * Your NestedIterator object will be instantiated and called as such:
