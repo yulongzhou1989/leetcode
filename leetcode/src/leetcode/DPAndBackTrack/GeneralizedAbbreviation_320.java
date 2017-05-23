@@ -7,7 +7,7 @@ public class GeneralizedAbbreviation_320 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(generateAbbreviations("word"));
+		System.out.println(generateAbbreviations("usaandchinaarefriends"));
 	}
 	
 	public static List<String> generateAbbreviations(String word) {
