@@ -1,7 +1,7 @@
 package leetcode.DPAndBackTrack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -18,9 +18,40 @@ public class WordBreakII_google_140 {
 		
 		//System.out.println(Arrays.toString(wordBreak("catsanddog", list).toArray()));
 	}
+	
+	//Add memo
+	public List<String> wordBreak(String s, List<String> wordDict) {
+        HashSet<String> set = new HashSet<>();
+		for(String word:wordDict){
+			set.add(word);
+		}
+		//backtrack find all list
+		return getBreakWords(set, s, new HashMap<String, List<String>>());
+    }
+	
+	private List<String> getBreakWords(HashSet<String> set, String s, HashMap<String, List<String>> map){
+		if(map.containsKey(s)) return map.get(s);
+		List<String> res = new ArrayList<>();
+		if(s.length()==0){
+			res.add("");
+			return res;
+		}
+		for(int i=0;i<s.length()+1;i++){
+			if(set.contains(s.substring(0,i))){
+			    List<String> subList = getBreakWords(set, s.substring(i), map);
+			    for(String sub:subList){
+			        res.add(s.substring(0,i) + (sub.isEmpty()?"":" ") + sub);
+			    }
+			}
+		}
 
+        map.put(s, res);
+		return res;
+	}
+
+	
 	//TODO: add memo
-    public List<String> wordBreak(String s, List<String> wordDict) {
+    public List<String> wordBreak1(String s, List<String> wordDict) {
         HashSet<String> set = new HashSet<>();
 		for(String word:wordDict){
 			set.add(word);
