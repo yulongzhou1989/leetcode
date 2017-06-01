@@ -8,6 +8,16 @@ public class LongestIncreasingSubsequenence_300 {
 		// TODO Auto-generated method stub
 
 	}
+	
+	/**
+	* increase sequence
+	* len = 1   :      [4], [5], [6], [3]   => tails[0] = 3
+	* len = 2   :      [4, 5], [5, 6]       => tails[1] = 5
+	* len = 3   :      [4, 5, 6]            => tails[2] = 6
+	*
+	* (1) if x is larger than all tails, append it, increase the size by 1
+	* (2) if tails[i-1] < x <= tails[i], update tails[i]
+	*/
 
 	//Onlogn binary search + dp
     public int lengthOfLIS(int[] nums) {
