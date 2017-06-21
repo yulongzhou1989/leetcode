@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 
 public class DesignTwitter_355 {
 
-public class Twitter {
+	public class Twitter {
 		
 		int timestamp;
 		HashMap<Integer, User> users;

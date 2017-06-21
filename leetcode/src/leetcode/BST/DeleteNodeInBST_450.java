@@ -1,4 +1,4 @@
-package leetcode.BFS;
+package leetcode.BST;
 
 import common.TreeNode;
 
