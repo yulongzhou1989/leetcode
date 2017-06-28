@@ -1,4 +1,4 @@
-package leetcode.DPAndBackTrack;
+package leetcode.dp;
 
 public class BestTimeToBuyAndSellStockWithCooldown_google_309 {
 
