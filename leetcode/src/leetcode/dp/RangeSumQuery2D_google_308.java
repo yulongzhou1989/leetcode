@@ -1,4 +1,4 @@
-package leetcode.design;
+package leetcode.dp;
 
 public class RangeSumQuery2D_google_308 {
 
