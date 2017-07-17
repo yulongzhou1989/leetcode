@@ -24,4 +24,14 @@ public class util {
 		
 		return res;
 	}
+	
+	public static List<String> stringToArrayList1(String s){
+		String [] arr = s.split(",");
+		List<String> list = new ArrayList<>();
+		for(String ss:arr){
+			list.add(ss);
+		}
+		
+		return list;
+	}
 }
