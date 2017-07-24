@@ -1,5 +1,9 @@
 package leetcode.sort;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+
 import common.ListNode;
 
 public class MergeKSortedList_google_23 {
@@ -36,4 +40,33 @@ public class MergeKSortedList_google_23 {
 			return list2;
 		}
 	}
+	
+	
+	public ListNode mergeKLists1(List<ListNode> lists) {  
+        // write your code here
+        if(lists==null || lists.size()==0) return null;
+        ListNode Dummy = new ListNode(0);
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.size(),
+        new Comparator<ListNode>(){
+            @Override
+            public int compare(ListNode l1, ListNode l2){
+                return l1.val - l2.val;
+            }
+        });
+        for(ListNode l:lists){
+            if(l!=null)
+                pq.offer(l); 
+        }
+        ListNode head = Dummy;
+        while(!pq.isEmpty()){
+            ListNode node = pq.poll();
+            if(node.next!=null){
+                pq.offer(node.next);
+            }
+            head.next = node;
+            head = head.next;
+        }
+        
+        return Dummy.next;
+    }
 }
