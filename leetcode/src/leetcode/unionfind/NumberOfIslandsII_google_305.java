@@ -1,4 +1,4 @@
-package leetcode.search;
+package leetcode.unionfind;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +10,93 @@ public class NumberOfIslandsII_google_305 {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public List<Integer> numIslands21(int m, int n, int[][] positions) {
+        List<Integer> list = new ArrayList<>();
+		if(positions==null || positions.length==0) return list;
+		Union un = new Union(m, n);//initial union map
+		int [][] dirs = new int [][] {{0,-1},{-1,0},{1,0},{0,1}};
+		//add each node to the union, then search 4 directions check if we can merge it
+		for(int [] pos: positions){
+			int x = pos[0], y = pos[1];
+			int p = un.add(x, y);
+			for(int [] d: dirs){
+				int q = un.getId(x+d[0], y+d[1]);//check existed of current node
+                //System.out.println(Arrays.toString(un.parents));
+				if(q>0 && !un.find(p, q)){
+					un.unite(p,q);
+				}
+			}
+			list.add(un.getCount());
+		}
+		
+		return list;
+    }
+	
+	class Union{
+		
+		public int [] parents;
+		int [] ranks;
+		int m, n, count;
+		
+		public Union(int m, int n){
+			this.m = m;
+			this.n = n;
+			this.parents = new int [m*n+1];
+			this.ranks = new int [m*n+1];
+			this.count = 0;
+		}
+		
+		public int getCount(){
+			return count;
+		}
+		
+		public int index(int x, int y){
+			return x*n+y+1;
+		}
+		
+		public int getId(int x, int y){
+			if(x>=0 && x<m && y>=0 && y<n)
+				return parents[index(x, y)];
+			else
+				return 0;
+		}
+		
+		public int add(int x, int y){
+			int i = index(x, y);
+			parents[i] = i;
+			ranks[i] = 1;
+			count++;
+			return i;
+		}
+		
+		public boolean find(int p, int q){
+			return root(p) == root(q);
+		}
+		
+		public void unite(int p, int q){
+			int i = root(p), j = root(q);
+			if(ranks[i]<ranks[j]){//fast unite by ranks/weight
+				parents[i] = j; 
+				ranks[j] += ranks[i];
+			}else{
+				parents[j] = i;
+				ranks[i] += ranks[j];
+			}
+			
+			count--;
+		}
+		
+		
+		public int root(int i){
+			for(;i!=parents[i]; i=parents[i]){
+				parents[i] = parents[parents[i]];//compression tree structure
+			}
+			
+			return i;
+		} 
+	}
+	
 	//UNION AND FIND
 	public List<Integer> numIslands2(int m, int n, int[][] positions) {
         
