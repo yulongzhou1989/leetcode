@@ -1,4 +1,4 @@
-package leetcode.DPAndBackTrack.BSF_DFS;
+package leetcode.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +11,58 @@ public class EvaluateDivision_google_399 {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public double[] calcEquation1(String[][] equations, double[] values, String[][] queries) {
+	    if(equations==null || equations.length==0) return new double [] {};
+	    HashMap<String, HashMap<String, Double>> map = new HashMap<>();
+	    int n = equations.length;
+	    for(int i=0;i<n;i++){//initial map
+	        String a = equations[i][0];
+	        String b = equations[i][1];
+	        double val = values[i];
+	        if(!map.containsKey(a)){
+	            map.put(a, new HashMap<>());
+	        }
+	        if(!map.containsKey(b)){
+	            map.put(b, new HashMap<>());
+	        }
+	        map.get(a).put(b, val);
+	        if(val!=0)
+	            map.get(b).put(a, 1/val);
+	    }
+	    
+	    int m = queries.length;
+	    double [] res = new double [m];
+	    
+	    for(int i=0;i<m;i++){
+	        Double r = dfs(map, queries[i][0], queries[i][1], new HashSet<>());
+	        res[i] = r==null?-1:r;
+	    }
+	    
+	    return res;
+	}
+	    
+	public Double dfs(HashMap<String, HashMap<String, Double>> map, String s, String e
+	                  , HashSet<String> visited){
+	    if(!map.containsKey(s)){//base condition
+	        return null;
+	    }
+	    if(visited.contains(s+":"+e)) {
+	        return null;
+	    }
+	    if(s.equals(e)) return 1.0;
+	    HashMap<String, Double> values = map.get(s);
+	    visited.add(s+":"+e);//set visited
+	    for(String k: values.keySet()){//do things
+	        Double res = dfs(map, k, e, visited);
+	        if(res!=null){
+	            return res*map.get(s).get(k);
+	        }
+	    }
+	    visited.remove(s+":"+e);//reset visited
+	    return null;//return result
+	}
+	
 	
 	public double[] calcEquation(String[][] equations, double[] values, String[][] queries) {
         //two hash tables to save route and value
