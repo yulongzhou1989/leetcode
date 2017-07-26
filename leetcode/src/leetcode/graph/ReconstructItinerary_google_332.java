@@ -1,4 +1,4 @@
-package leetcode.DPAndBackTrack.BSF_DFS;
+package leetcode.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,33 +13,35 @@ public class ReconstructItinerary_google_332 {
 		// TODO Auto-generated method stub
 		//String [][] tickets = new String [][] {{"MUC","LHR"},{"JFK","MUC"},{"SFO","SJC"},{"LHR","SFO"}};
 		String [][] tickets = new String [][] {{"JFK","SFO"},{"JFK","ATL"},{"SFO","ATL"},{"ATL","JFK"},{"ATL","SFO"}};
-		System.out.println(String.valueOf(findItinerary(tickets)));
+		//System.out.println(String.valueOf(findItinerary(tickets)));
 	}
 	
-	public static List<String> findItinerary(String[][] tickets) {
+	public List<String> findItinerary(String[][] tickets) {
 		List<String> res = new ArrayList<>();
-		if(tickets==null || tickets.length==0) return res;
-	    //save the map
-		Map<String, PriorityQueue<String>> map = new HashMap<>();
-		for(String [] ticket:tickets){
-			if(!map.containsKey(ticket[0])) map.put(ticket[0], new PriorityQueue<>());
-			map.get(ticket[0]).add(ticket[1]);
+		if(tickets==null || tickets.length==0 || tickets[0].length==0) return res;
+        HashMap<String, PriorityQueue<String>> map = new HashMap<>();
+		for(String [] t:tickets){//initial map
+			String from = t[0];
+			String to = t[1];
+			if(!map.containsKey(from)){
+				map.put(from, new PriorityQueue<>());
+			}
+			map.get(from).offer(to);
 		}
-		//dfs search
-		List<String> temp = new ArrayList<>();
-		temp.add("JFK");
-		dfs(res, map, "JFK");
+		
+		dfs(map, res, "JFK");
 		
 		return res;
-	}
+    }
 	
-	
-	private static void dfs(List<String> res, Map<String, PriorityQueue<String>> map, String from){
-		PriorityQueue<String> q = map.get(from);
-		while(!q.isEmpty()){
-			dfs(res, map, q.poll());
+	private void dfs(HashMap<String, PriorityQueue<String>> map, List<String> res, String from){
+		if(map.containsKey(from)){
+            PriorityQueue<String> pq = map.get(from);
+            while(pq!=null && !pq.isEmpty()){
+                dfs(map, res, pq.poll());
+            }
 		}
-		res.add(0,from);
+		res.add(0, from);
 	}
 	
 //	public static List<String> findItinerary(String[][] tickets) {
