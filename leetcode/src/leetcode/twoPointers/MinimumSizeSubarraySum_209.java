@@ -8,22 +8,22 @@ public class MinimumSizeSubarraySum_209 {
 	}
 	
 	
-	public int minSubArrayLen(int s, int[] nums) {
-        if(nums.length==0) return 0;
-		//2 pointers records left and right boundary
-		int len = Integer.MAX_VALUE;
-		int sum = 0;
-		for(int i=0, j=0; i<nums.length;i++){
-			while(j<nums.length && sum<s){
-				sum += nums[j++];
+    public int minSubArrayLen(int s, int[] nums) {
+        int n = nums.length;
+		int sum = 0, min = Integer.MAX_VALUE;
+		for(int i=0,j=0;i<n;i++){
+			while(j<n && sum<s){
+				sum+=nums[j];
+				j++;
 			}
+			//System.out.println(sum + "," +i + "," + j);
 			if(sum>=s){
-				len = Math.min(len, j-i);
+				min = Math.min(min, j-i);
 			}
-			sum -= nums[i];
+			sum-=nums[i];
 		}
 		
-		return len==Integer.MAX_VALUE?0:len;
+		return min==Integer.MAX_VALUE?0:min;
     }
 
 }
