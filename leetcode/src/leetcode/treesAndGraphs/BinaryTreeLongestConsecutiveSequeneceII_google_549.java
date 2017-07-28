@@ -4,38 +4,40 @@ import common.TreeNode;
 
 public class BinaryTreeLongestConsecutiveSequeneceII_google_549 {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
-	int maxInterval = 0;
+	int max = 0;
 	public int longestConsecutive(TreeNode root) {
         helper(root);
-        return maxInterval;
+		return max;
     }
 	
-	private int [] helper(TreeNode root){
-		if(root==null) return new int [] {0,0};
-		int incr = 1, dcr = 1;
-		//search tree left node
+	//a[0]->increase, a[1] decrease
+	public int [] helper(TreeNode root){
+		if(root==null) return new int [] {};
+		int incMax = 1, decMax=1;
 		if(root.left!=null){
-			int [] l = helper(root.left);
-			if(root.val == root.left.val+1)
-				dcr = l[1] + 1;
-			else if(root.val == root.left.val-1)
-				incr = l[0] + 1;
+			int [] res = helper(root.left);
+			//increase
+			if(root.left.val-1 == root.val){
+				incMax = Math.max(incMax, res[0]+1);
+			}
+			if(root.left.val+1 == root.val){
+				decMax = Math.max(decMax, res[1]+1);
+			}
 		}
-		//search tree right node, get the max decrease for right node and left node
 		if(root.right!=null){
-			int [] l = helper(root.right);
-			if(root.val == root.right.val+1)
-				dcr = Math.max(dcr, l[1]+1);
-			if(root.val == root.right.val -1)
-				incr = Math.max(incr, l[0]+1);
+			int [] res = helper(root.right);
+			//increase
+			if(root.right.val-1 == root.val){
+				incMax = Math.max(incMax, res[0]+1);
+			}
+			if(root.right.val+1 == root.val){
+				decMax = Math.max(decMax, res[1]+1);
+			}
 		}
-		maxInterval = Math.max(maxInterval, dcr+incr-1);
 		
-		return new int [] {incr, dcr};
+		int curMax = incMax+decMax-1;
+		max = Math.max(curMax, max);
+		
+		return new int [] {incMax, decMax};
 	}
 }
