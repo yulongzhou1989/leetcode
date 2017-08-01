@@ -1,4 +1,4 @@
-package leetcode.treesAndGraphs;
+package leetcode.BST;
 
 import common.TreeNode;
 

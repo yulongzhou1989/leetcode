@@ -1,4 +1,4 @@
-package leetcode.BST;
+package leetcode.BFS;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
