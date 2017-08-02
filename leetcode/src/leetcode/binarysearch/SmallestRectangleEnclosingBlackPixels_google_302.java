@@ -10,6 +10,77 @@ public class SmallestRectangleEnclosingBlackPixels_google_302 {
 
 	}
 	
+	public int minArea2(char[][] image, int x, int y) {
+		if(image==null || image.length==0 || image[0].length==0) return 0;
+		int m = image.length;
+		int n = image[0].length;
+		int up = searchColumn(image, 0, y, 0, m, true);
+		int bottom = searchColumn(image, y+1, n, 0, m, false);
+		int left = searchRow(image, 0, x, up, bottom, true);
+		int right = searchRow(image, x+1, m, up, bottom, false);
+		//System.out.println(up + "," + bottom + "," + left + "," + right);
+        
+		return (bottom-up)*(right-left);
+	}
+	
+	private int searchColumn(char [][] image, int l, int h, int s, int e, boolean opt){
+		
+		while(l<h){
+			int m = l + (h - l) / 2;
+			int k = s;
+			while(k < e){
+				if(image[k][m] == '1') break;
+				k++;
+			}
+            
+			if(k==e){//reach the end, we all want left part ( 0, 1(W), 1, 0(W))
+				if(opt){
+					l = m + 1;
+				}else{
+					h = m;
+				}
+			}else{
+				if(opt){
+					h = m;
+				}else{
+					l = m + 1;
+				}
+			}
+		}
+		
+		return l;
+	}
+	
+	
+	private int searchRow(char [][] image, int l, int h, int s, int e, boolean opt){
+		while(l<h){
+			int m = l + (h - l) / 2;
+			int k = s;
+			while(k<e){
+				if(image[m][k] == '1') {
+					break;
+				}
+				k++;
+			}
+			
+			if(k==e){//reach the end, we all want left part ( 0, 1(W), 1, 0(W))
+				if(opt){
+					l = m + 1;
+				}else{
+					h = m;
+				}
+			}else{
+				if(opt){
+					h = m;
+				}else{
+					l = m + 1;
+				}
+			}
+		}
+		
+		return l;
+	}
+	
 	//O(mlogm)
 	public int minArea(char[][] image, int x, int y) {
 		if(image==null || image.length==0 || image[0].length==0) return 0;

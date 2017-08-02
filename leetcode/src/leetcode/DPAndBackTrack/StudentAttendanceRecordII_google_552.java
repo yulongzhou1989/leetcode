@@ -30,4 +30,29 @@ public class StudentAttendanceRecordII_google_552 {
 		
 		return dp[n][1][2];
     }
+	
+	
+	public int checkRecord1(int n) {
+		long [][] dp = new long [n+1][2];
+		
+		dp[0][1] = dp[0][0] = 1;//空is also a possiblity
+		dp[1][1] = 2;
+        dp[1][0] = 1;
+		
+		for(int i = 2; i <= n; i++){
+			dp[i][0] = dp[i-1][1];//end with P
+            // end with P + end with L
+            dp[i][1] = (dp[i][0] + dp[i-1][0] + dp[i-2][0])%M;
+		}
+        
+        //insert A
+        long res = dp[n][1];//initial with without A
+        //insert A, before A part, 全排列， after A 全排列
+		for(int i=0;i<n;i++){
+			long withA = (dp[i][1] * dp[n-i-1][1])%M;
+			res = (res+withA)%M;
+		}
+        
+        return (int) res;
+    }
 }

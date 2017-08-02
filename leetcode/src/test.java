@@ -45,14 +45,39 @@ public class test {
         int max = 0;
         for(int i=0,j=0;i<n;i++){
             while(j<n && map[s.charAt(j)]==0){
-                map[s.charAt(j)] =1;//更新j状态
+                map[s.charAt(j)] =1;//æ›´æ–°jçŠ¶æ€�
                 max = Math.max(max, j-i+1);
-                j++;//移动j下标
+                j++;//ç§»åŠ¨jä¸‹æ ‡
             }
-            map[s.charAt(i)]--;//更新i
+            map[s.charAt(i)]--;//æ›´æ–°i
         }
         
         return max;
     }
+	
+	public int[] moveZero(int[] array) {
+		// Write your solution here.
+		if(array == null || array.length < 2) return array;
+		int n = array.length;
+		int i = n-1;//slow pointer
+		int j = n-1;//fast pointer
+		while(j >= 0) {
+			while(j>=0){
+				if(array[j] == 0) break;
+				j--;
+			}
+			if(j < 0) break;
+			swap(j, i, array);
+			i--;
+		}
+		
+		return array;
+	}  
+	
+	private void swap(int a, int b, int [] array){
+		int temp = array[a];
+		array[a] = array[b];
+		array[b] = temp;
+	} 
 	
 }
