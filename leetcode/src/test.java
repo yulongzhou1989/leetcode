@@ -1,3 +1,4 @@
+import java.util.Stack;
 
 public class test {
 	
@@ -79,5 +80,38 @@ public class test {
 		array[a] = array[b];
 		array[b] = temp;
 	} 
+	
+	public class Solution {
+		  public Solution() {
+		    // write your solution here
+		  }
+		  
+		  Stack<Integer> numberStack = new Stack<>();
+			Stack<Integer> minStack = new Stack<>();
+				
+			public int pop() {
+				if(numberStack.isEmpty()) return -1;
+				if(minStack.peek() == numberStack.peek())
+					minStack.pop();
+				return numberStack.pop();
+			}
+
+			public void push(int element) {
+				if(minStack.isEmpty() || minStack.peek() >= element){
+					minStack.push(element);
+				}
+				numberStack.push(element);
+			}
+
+			public int top() {
+				if(numberStack.isEmpty()) return -1;
+				return numberStack.peek();
+			}
+
+			public int min() {
+				if(numberStack.isEmpty()) return -1;
+				return minStack.peek();
+			}
+		}
 	
 }
