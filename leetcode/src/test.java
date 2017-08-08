@@ -1,5 +1,7 @@
 import java.util.Stack;
 
+import common.ListNode;
+
 public class test {
 	
 	public int binarySearch(int [] nums, int target){//find a target
@@ -113,5 +115,29 @@ public class test {
 				return minStack.peek();
 			}
 		}
+	
+	
+	public ListNode partition(ListNode head, int target) {
+		ListNode dummy1 = new ListNode(0);//for left part
+		ListNode dummy2 = new ListNode(0);//for right part
+		dummy1.next = head;
+		ListNode pre1 = dummy1;
+		ListNode pre2 = dummy2;
+		
+		while(pre1.next != null){
+			if(pre1.next.val < target){
+				pre2.next = pre1.next;//add cur node to dummy2
+				pre2 = pre2.next;//move dummy2 
+				pre1.next = pre1.next.next;//remove cur node from dummy1
+			} else{
+				pre1 = pre1.next;//move dummy1
+			}
+		}
+		
+		pre1.next = dummy1.next;//join
+		
+		return dummy2.next;
+	}
+
 	
 }
